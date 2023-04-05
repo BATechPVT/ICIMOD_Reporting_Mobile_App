@@ -1,40 +1,22 @@
-import React, {
-  useCallback,
-  useMemo,
-  useRef,
-  useEffect,
-  useState,
-} from "react";
+import moment from "moment";
+import React from "react";
 import {
-  View,
-  Text,
-  ImageBackground,
   Image,
-  TouchableOpacity,
-  Alert,
   ScrollView,
+  Text,
+  View
 } from "react-native";
-import { FontSizes } from "../../../../theme/FontSizes";
-import { ThemeContext } from "../../../../theme/theme-context";
-import { statusCodes, dataTypes } from "../../../Config/Constants";
 import {
-  ANR_LOGO,
-  APP_LOGO,
-  DISTRIBUTION_LOGO,
-  NURSERIES_LOGO,
-  PLANTATION_LOGO,
-  SOWING_LOGO,
-  FOREST_LOGO,
-  MAP_ICONN,
-} from "../../../../assets/Images";
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
+  widthPercentageToDP as wp
 } from "react-native-responsive-screen";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import {
+  MAP_ICONN
+} from "../../../../assets/Images";
+import { FontSizes } from "../../../../theme/FontSizes";
+import { ThemeContext } from "../../../../theme/theme-context";
 import { Button } from "../../../Components/Button";
 import { Unit } from "../../../Config/helper";
-import moment from "moment";
 export default function PlantationDetail(props: any) {
   const [loading, setLoading] = React.useState(true);
   const { dark, theme, toggle } = React.useContext(ThemeContext);
@@ -85,7 +67,7 @@ export default function PlantationDetail(props: any) {
   ];
   const getRowcolor = (index: number) => {
     if (index % 2 === 0) return theme.cardRowBackGround;
-    else return theme.cardBackGround;
+    else return 'black';
   };
   return (
     <View style={{ flex: 1, backgroundColor: theme.primary }}>

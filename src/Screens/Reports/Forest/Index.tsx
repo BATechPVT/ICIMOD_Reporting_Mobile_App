@@ -1,55 +1,36 @@
+import moment from "moment";
 import React, {
-  useCallback,
-  useMemo,
-  useRef,
-  useEffect,
-  useState,
+  useEffect
 } from "react";
 import {
-  View,
-  Text,
-  ImageBackground,
   Image,
+  Text,
   TouchableOpacity,
-  Alert,
-  ScrollView,
+  TouchableWithoutFeedback,
+  View
 } from "react-native";
-import { FontSizes } from "../../../../theme/FontSizes";
-import { ThemeContext } from "../../../../theme/theme-context";
-import { statusCodes, dataTypes } from "../../../Config/Constants";
-import {
-  ANR_LOGO,
-  APP_LOGO,
-  DISTRIBUTION_LOGO,
-  NURSERIES_LOGO,
-  PLANTATION_LOGO,
-  SOWING_LOGO,
-  FOREST_LOGO,
-  REPORT_OCCURANCE_ICON,
-} from "../../../../assets/Images";
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from "react-native-responsive-screen";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import AntDesign from "react-native-vector-icons/AntDesign";
-import Accordion from "react-native-collapsible/Accordion";
 import * as Animatable from "react-native-animatable";
-import { TouchableWithoutFeedback } from "react-native";
+import Accordion from "react-native-collapsible/Accordion";
 import {
-  GET_ANR_SITES,
-  GET_FOREST_SITES,
-  GET_PLANTATION_SITES,
-  GET_NURSRIES_SITES,
-} from "../../../Config/URLs";
+  widthPercentageToDP as wp
+} from "react-native-responsive-screen";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import {
-  REPORT_NAME_ICON,
   REPORT_DIST_ICON,
+  REPORT_NAME_ICON,
   VIEW_REPORT_ICON,
 } from "../../../../assets/Images";
+import { FontSizes } from "../../../../theme/FontSizes";
+import { ThemeContext } from "../../../../theme/theme-context";
+import { dataTypes, statusCodes } from "../../../Config/Constants";
+import {
+  BASE_URL_1,
+  GET_FOREST_SITES
+} from "../../../Config/URLs";
 import { get } from "../../../Config/api";
-import moment from "moment";
 import { Unit } from "../../../Config/helper";
+
 const data = [
   {
     id: 0,
@@ -61,6 +42,7 @@ const data = [
     updatedAt: "2 days ago",
   },
 ];
+
 export default function ForestReportDashBoard(props: any) {
   const [activeSections, setActiveSections] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
@@ -118,7 +100,7 @@ export default function ForestReportDashBoard(props: any) {
         >
           {reportType == dataTypes.FOREST_SITE && section?.siteImage !== "" && (
             <Image
-              source={{ uri: section?.siteImage }}
+              source={{ uri: `${BASE_URL_1}`  +  section?.siteImage.replace("\\", "/") }}
               resizeMode="contain"
               style={{ height: 50, width: 50, borderRadius: 100 }}
             />
@@ -179,7 +161,8 @@ export default function ForestReportDashBoard(props: any) {
                   color: theme.textColor,
                 }}
               >
-                {moment.utc(section?.updatedAt).fromNow()}
+                {/* {moment.utc(section?.updatedAt).fromNow()} */}
+                {moment(section?.updatedAt).fromNow()}
               </Text>
             </View>
           </View>
@@ -249,7 +232,7 @@ export default function ForestReportDashBoard(props: any) {
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
-              backgroundColor: "transparent",
+              backgroundColor: 'black',
               paddingHorizontal: 12,
               paddingVertical: 8,
               borderRadius: 2,

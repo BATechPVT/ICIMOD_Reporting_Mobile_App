@@ -214,7 +214,7 @@ export default function PlantationReportDashBoard(props: any) {
               </Text>
             </View>
             <Text style={{ flex: 1 }}>
-              {": " + section.area + " " + Unit(section?.unit)}
+              {": " + section.area + " " + Unit(section?.unitType)}
             </Text>
           </View>
           <View
@@ -222,7 +222,7 @@ export default function PlantationReportDashBoard(props: any) {
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
-              backgroundColor: "transparent",
+              backgroundColor: "black",
               paddingHorizontal: 12,
               paddingVertical: 8,
               borderRadius: 2,

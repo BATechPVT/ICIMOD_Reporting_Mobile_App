@@ -1,37 +1,33 @@
 // In App.js in a new project
 
-import * as React from "react";
-import { View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import DashBoard from "./BottomTabs";
-import { getData } from "../Config/localStorage";
+import * as React from "react";
 import { userData } from "../Config/Constants";
-import LoginScreen from "../Screens/Auth/LoginScreen";
-import RegisterScreen from "../Screens/Auth/RegisterScreen";
-import HomeScreen from "../Screens/DashBoard/Home";
-import AddReportScreen from "../Screens/Reports/AddReports";
-import ReportDashBoard from "../Screens/Reports/Forest/Index";
-import ReportDetailScreen from "../Screens/Reports/Forest/ReportDetail";
-import MapScreen from "../Screens/Reports/MapView";
-import { CameraPage } from "../Screens/Camera/Camera";
+import { getData } from "../Config/localStorage";
+import ANRForm from "../Forms/ANR";
+import DistributionForm from "../Forms/Distribution";
 import ForestForm from "../Forms/Forest";
+import NurseryForm from "../Forms/Nursery";
+import NurseryStockForm from "../Forms/NurseryStock";
 import PlantationForm from "../Forms/Plantation";
 import SowingForm1 from "../Forms/Sowing/Form1";
 import SowingForm2 from "../Forms/Sowing/Form2";
 import SowingForm3 from "../Forms/Sowing/Form3";
-import ANRForm from "../Forms/ANR";
-import DistributionForm from "../Forms/Distribution";
-import NurseryForm from "../Forms/Nursery";
-import NurseryStockForm from "../Forms/NurseryStock";
-import PlantationReportDashBoard from "../Screens/Reports/Plantation/Index";
-import PlantationDetail from "../Screens/Reports/Plantation/ReportDetail";
+import LoginScreen from "../Screens/Auth/LoginScreen";
+import RegisterScreen from "../Screens/Auth/RegisterScreen";
+import { CameraPage } from "../Screens/Camera/Camera";
+import HomeScreen from "../Screens/DashBoard/Home";
 import AnrReportDashBoard from "../Screens/Reports/ANR/Index";
 import AnrReportDetail from "../Screens/Reports/ANR/ReportDetail";
+import AddReportScreen from "../Screens/Reports/AddReports";
+import ForestReportDashBoard from "../Screens/Reports/Forest/Index";
+import ForestReportDetail from "../Screens/Reports/Forest/ReportDetail";
+import MapScreen from "../Screens/Reports/MapView";
 import NurseryReportDashBoard from "../Screens/Reports/Nurseries/Index";
 import NurseriesDetail from "../Screens/Reports/Nurseries/ReportDetail";
-import ForestReportDetail from "../Screens/Reports/Forest/ReportDetail";
-import ForestReportDashBoard from "../Screens/Reports/Forest/Index";
+import PlantationReportDashBoard from "../Screens/Reports/Plantation/Index";
+import PlantationDetail from "../Screens/Reports/Plantation/ReportDetail";
 
 const Stack = createNativeStackNavigator();
 

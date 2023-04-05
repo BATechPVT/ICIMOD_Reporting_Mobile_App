@@ -237,7 +237,7 @@ export default function NurseryReportDashBoard(props: any) {
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
-              backgroundColor: "transparent",
+              backgroundColor: "black",
               paddingHorizontal: 12,
               paddingVertical: 8,
               borderRadius: 2,

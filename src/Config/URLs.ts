@@ -1,4 +1,7 @@
-export const BASE_URL = "http://182.180.90.212:9001/api/";
+
+export const BASE_URL_1 = "http://182.180.90.212:9001/";
+
+export const BASE_URL = BASE_URL_1 + 'api/';
 
 export const LOGIN = BASE_URL + "Account/login";
 

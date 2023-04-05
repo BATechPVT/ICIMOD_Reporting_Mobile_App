@@ -108,7 +108,7 @@ export default function AddReportScreen(props: any) {
             }}
           >
             <Button
-              title={"Add " + reportType + " Activity"}
+              title={"Add " + reportType + " Site"}
               onPress={() => navigateOptions()}
               leftIcon={
                 <Image

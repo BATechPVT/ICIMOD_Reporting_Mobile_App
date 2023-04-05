@@ -1,35 +1,25 @@
-import React, {
-  useCallback,
-  useMemo,
-  useRef,
-  useEffect,
-  useState,
-} from "react";
+import React from "react";
 import {
-  View,
-  Text,
-  ImageBackground,
   Image,
-  TouchableOpacity,
-  Alert,
   ScrollView,
+  Text,
+  TouchableOpacity,
+  View
 } from "react-native";
-import { FontSizes } from "../../../theme/FontSizes";
-import { ThemeContext } from "../../../theme/theme-context";
-import { statusCodes, dataTypes } from "../../Config/Constants";
+import {
+  widthPercentageToDP as wp
+} from "react-native-responsive-screen";
 import {
   ANR_LOGO,
-  APP_LOGO,
   DISTRIBUTION_LOGO,
+  FOREST_LOGO,
   NURSERIES_LOGO,
   PLANTATION_LOGO,
-  SOWING_LOGO,
-  FOREST_LOGO,
+  SOWING_LOGO
 } from "../../../assets/Images";
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from "react-native-responsive-screen";
+import { FontSizes } from "../../../theme/FontSizes";
+import { ThemeContext } from "../../../theme/theme-context";
+import { dataTypes } from "../../Config/Constants";
 const Data = [
   {
     id: 0,
