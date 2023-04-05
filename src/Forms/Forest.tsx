@@ -1,41 +1,39 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-  useMemo,
-} from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  FlatList,
-  TextInput,
-  Alert,
-  BackHandler,
-  Dimensions,
-} from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import axios from "axios";
-import Spinner from "react-native-loading-spinner-overlay";
-import { BASE_URL } from "../Config/URLs";
-import Geolocation from "@react-native-community/geolocation";
-import Feather from "react-native-vector-icons/Feather";
-import { InteractiveCell } from "../Components/InteractiveCell";
 import {
   BottomSheetBackdrop,
   BottomSheetModal,
   BottomSheetModalProvider,
 } from "@gorhom/bottom-sheet";
-import { SheetHeader } from "../Components/BottomSheetHeader";
-import PickerComponent from "../Components/Picker";
+import Geolocation from "@react-native-community/geolocation";
+import axios from "axios";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import {
+  Alert,
+  BackHandler,
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
+} from "react-native";
+import Spinner from "react-native-loading-spinner-overlay";
+import Feather from "react-native-vector-icons/Feather";
 import { useUpdateEffect } from "react-use";
-import { ThemeContext } from "../../theme/theme-context";
 import { FontSizes } from "../../theme/FontSizes";
+import { ThemeContext } from "../../theme/theme-context";
+import { SheetHeader } from "../Components/BottomSheetHeader";
 import { Button } from "../Components/Button";
+import { InteractiveCell } from "../Components/InteractiveCell";
+import PickerComponent from "../Components/Picker";
+import { BASE_URL } from "../Config/URLs";
+import base64File from "../Config/helper";
 const { height, width } = Dimensions.get("screen");
 
 const ForestForm = ({ navigation, route }) => {
@@ -297,7 +295,7 @@ const ForestForm = ({ navigation, route }) => {
 
   const SubmitFunction = () => {
     if (lat1 == 0 || lat2 == 0 || lat3 == 0 || lat4 == 0 || lat5 == 0) {
-      Alert.alert("Failure", "Please  Select atleast five points.", [
+      Alert.alert("Failure", "Please select atleast five points.", [
         {
           text: "OK",
           onPress: () => {
@@ -307,79 +305,111 @@ const ForestForm = ({ navigation, route }) => {
       ]);
     } else {
       setIsLoading(true);
-      const data = {
-        point1LongitudeX: long1,
-        point1LattitudeY: lat1,
 
-        point2LongitudeX: long2,
-        point2LattitudeY: lat2,
+      base64File(siteImage).then((base64String)=>{
+        const data = {
+          Point1LongitudeX: long1,
+          Point1LattitudeY: lat1,
+  
+          Point2LongitudeX: long2,
+          Point2LattitudeY: lat2,
+  
+          Point3LongitudeX: long3,
+          Point3LattitudeY: lat3,
+  
+          Point4LongitudeX: long4,
+          Point4LattitudeY: lat4,
+  
+          Point5LongitudeX: long5,
+          Point5LattitudeY: lat5,
+  
+          Point6LongitudeX: long5,
+          Point6LattitudeY: lat5,
+  
+          Point7LongitudeX: long5,
+          Point7LattitudeY: lat5,
+  
+          Point8LongitudeX: long5,
+          Point8LattitudeY: lat5,
+  
+          Point9LongitudeX: long5,
+          Point9LattitudeY: lat5,
+  
+          Point10LongitudeX: long5,
+          Point10LattitudeY: lat5,
 
-        point3LongitudeX: long3,
-        point3LattitudeY: lat3,
-
-        point4LongitudeX: long4,
-        point4LattitudeY: lat4,
-
-        point5LongitudeX: long5,
-        point5LattitudeY: lat5,
-
-        point6LongitudeX: long5,
-        point6LattitudeY: lat5,
-
-        point7LongitudeX: long5,
-        point7LattitudeY: lat5,
-
-        point8LongitudeX: long5,
-        point8LattitudeY: lat5,
-
-        point9LongitudeX: long5,
-        point9LattitudeY: lat5,
-
-        point10LongitudeX: long5,
-        point10LattitudeY: lat5,
-
-        division: DivisionValue?.id,
-        district: DistrictValue?.id,
-        tehsil: TehsilValue?.id,
-        siteType: SiteTypeValue?.id,
-        siteName: siteName,
-        village: village,
-        area: area,
-        unit: UnitValue?.id,
-        siteImage: siteImage,
-        siteId: 0,
-        siteDetailId: 0,
-        forestDivisionId: division,
-        name: siteName,
-        villageNeighborhood: village,
-        shapeFile: siteImage,
-      };
-      axios({
-        method: "post",
-        url: baseurl + "forest/addsite",
-        data,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
-        .then(function (response) {
-          console.log("success ", response);
-          setIsLoading(false);
-          Alert.alert("Success", response.data, [
-            {
-              text: "OK",
-              onPress: () => {
-                navigation.replace("DashBoard");
-              },
-            },
-          ]);
+          // "Point1LongitudeX": 61.0731977,
+          // "Point1LattitudeY": 30.2285471,
+          // "Point2LongitudeX": 61.0731977,
+          // "Point2LattitudeY": 30.2285471,
+          // "Point3LongitudeX": 61.0731977,
+          // "Point3LattitudeY": 30.2285471,
+          // "Point4LongitudeX": 61.0731977,
+          // "Point4LattitudeY": 30.2285471,
+          // "Point5LongitudeX": 61.0731977,
+          // "Point5LattitudeY": 30.2285471,
+          // "Point6LongitudeX": 61.0731977,
+          // "Point6LattitudeY": 30.2285471,
+          // "Point7LongitudeX": 61.0731977,
+          // "Point7LattitudeY": 30.2285471,
+          // "Point8LongitudeX": 61.0731977,
+          // "Point8LattitudeY": 30.2285471,
+          // "Point9LongitudeX": 61.0731977,
+          // "Point9LattitudeY": 30.2285471,
+          // "Point10LongitudeX": 61.0731977,
+          // "Point10LattitudeY": 30.2285471,
+  
+          division: DivisionValue?.id,
+          DistrictId: DistrictValue?.id,
+          TehsilId: TehsilValue?.id,
+          siteType: SiteTypeValue?.id,
+          siteName: siteName,
+          village: village,
+          area: area,
+          unit: UnitValue?.id,
+          siteImage: base64String,
+          siteId: 0,
+          siteDetailId: 0,
+          forestDivisionId: DivisionValue?.id,
+          name: siteName,
+          villageNeighborhood: village,
+          shapeFile: base64String,
+        };
+  
+        console.log('division: ', division);
+        console.log('url: ', baseurl + "forest/addsite");
+        console.log('body: ', JSON.stringify(data));
+  
+        axios({
+          method: "post",
+          url: baseurl + "forest/addsite",
+          data,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
         })
-        .catch((error) => {
-          console.log("error ", error);
-          setIsLoading(false);
-        });
+          .then(function (response) {
+            console.log("success ", response);
+            setIsLoading(false);
+            Alert.alert("Success", response.data, [
+              {
+                text: "OK",
+                onPress: () => {
+                  navigation.replace("DashBoard");
+                },
+              },
+            ]);
+          })
+          .catch((error) => {
+            console.log("error ", error);
+            setIsLoading(false);
+          });
+      }).catch((ex)=>{
+        console.log('ex: ', ex);
+        setIsLoading(false);
+      })
     }
   };
 

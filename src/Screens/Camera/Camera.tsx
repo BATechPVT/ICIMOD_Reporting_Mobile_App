@@ -1,35 +1,21 @@
+import { useIsFocused } from "@react-navigation/core";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import * as React from "react";
-import { useRef, useState, useMemo, useCallback } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
   ImageBackground,
   PermissionsAndroid,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import {
   PinchGestureHandler,
   PinchGestureHandlerGestureEvent,
   TapGestureHandler,
 } from "react-native-gesture-handler";
-import {
-  CameraCaptureError,
-  CameraDeviceFormat,
-  CameraRuntimeError,
-  FrameProcessorPerformanceSuggestion,
-  PhotoFile,
-  sortFormats,
-  useCameraDevices,
-  useFrameProcessor,
-  VideoFile,
-} from "react-native-vision-camera";
-import { Camera, frameRateIncluded } from "react-native-vision-camera";
-import {
-  CONTENT_SPACING,
-  MAX_ZOOM_FACTOR,
-  SAFE_AREA_PADDING,
-} from "./Constants";
+import { PressableOpacity } from "react-native-pressable-opacity";
 import Reanimated, {
   Extrapolate,
   interpolate,
@@ -37,24 +23,36 @@ import Reanimated, {
   useAnimatedProps,
   useSharedValue,
 } from "react-native-reanimated";
-import { useEffect } from "react";
-import { useIsForeground } from "./hooks/useIsForeground";
-import { StatusBarBlurBackground } from "./views/StatusBarBlurBackground";
-import { CaptureButton } from "./views/CaptureButton";
-import { PressableOpacity } from "react-native-pressable-opacity";
-import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import IonIcon from "react-native-vector-icons/Ionicons";
-import { examplePlugin } from "./frame-processors/ExamplePlugin";
-import type { Routes } from "./Routes";
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { useIsFocused } from "@react-navigation/core";
-import TakePhotoOptions from "react-native-vision-camera";
+import { widthPercentageToDP } from "react-native-responsive-screen";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
-import { widthPercentageToDP } from "react-native-responsive-screen";
+import IonIcon from "react-native-vector-icons/Ionicons";
+import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import {
+  Camera,
+  CameraCaptureError,
+  CameraDeviceFormat,
+  CameraRuntimeError,
+  FrameProcessorPerformanceSuggestion,
+  PhotoFile,
+  VideoFile,
+  frameRateIncluded,
+  sortFormats,
+  useCameraDevices,
+  useFrameProcessor,
+} from "react-native-vision-camera";
+import {
+  CONTENT_SPACING,
+  MAX_ZOOM_FACTOR,
+  SAFE_AREA_PADDING,
+} from "./Constants";
+import type { Routes } from "./Routes";
+import { examplePlugin } from "./frame-processors/ExamplePlugin";
+import { useIsForeground } from "./hooks/useIsForeground";
+import { StatusBarBlurBackground } from "./views/StatusBarBlurBackground";
 
-import ErrorAlert from "../../Components/ErrorAlerts";
 import { useUpdateEffect } from "react-use";
+import ErrorAlert from "../../Components/ErrorAlerts";
 const ReanimatedCamera = Reanimated.createAnimatedComponent(Camera);
 Reanimated.addWhitelistedNativeProps({
   zoom: true,
@@ -325,7 +323,7 @@ export function CameraPage(props: any) {
     try {
       const photo = await camera.current.takeSnapshot({
         quality: 80,
-        skipMetadata: true,
+        skipMetadata: true
       });
       console.log("file://" + photo?.path);
       setPhoto("file://" + photo?.path);
