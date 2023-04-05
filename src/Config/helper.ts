@@ -36,6 +36,30 @@ export const Unit = (unit: number) => {
   }
 };
 
+export const GET_SOWING_TYPE = (unit: number) => {
+  if (unit == 1) {
+    return "Pitch";
+  } else if (unit == 2) {
+    return "Patch";
+  } else if (unit == 3) {
+    return "Trench";
+  } else {
+    return "N/A";
+  }
+};
+
+export const GET_ACTIVITY_NAME = (unit: number) => {
+  if (unit == 1) {
+    return "Sowing";
+  } else if (unit == 2) {
+    return "Dibbling";
+  } else if (unit == 3) {
+    return "Sowing & Dibbling";
+  } else {
+    return "N/A";
+  }
+};
+
 export default async function base64File(url) {
   const data = await fetch(url);
   const blob = await data.blob();

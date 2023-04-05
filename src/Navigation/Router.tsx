@@ -28,6 +28,8 @@ import NurseryReportDashBoard from "../Screens/Reports/Nurseries/Index";
 import NurseriesDetail from "../Screens/Reports/Nurseries/ReportDetail";
 import PlantationReportDashBoard from "../Screens/Reports/Plantation/Index";
 import PlantationDetail from "../Screens/Reports/Plantation/ReportDetail";
+import SowingReportDashBoard from "../Screens/Reports/Sowing/Index";
+import SowingDetail from "../Screens/Reports/Sowing/SowingDetail";
 
 const Stack = createNativeStackNavigator();
 
@@ -76,7 +78,12 @@ function Router() {
           name="PlantationReportDashBoard"
           component={PlantationReportDashBoard}
         />
+        <Stack.Screen
+          name="SowingReportDashBoard"
+          component={SowingReportDashBoard}
+        />
         <Stack.Screen name="PlantationDetail" component={PlantationDetail} />
+        <Stack.Screen name="SowingDetail" component={SowingDetail} />
         <Stack.Screen
           name="AnrReportDashBoard"
           component={AnrReportDashBoard}

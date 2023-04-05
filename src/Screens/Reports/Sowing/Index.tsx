@@ -25,12 +25,12 @@ import { FontSizes } from "../../../../theme/FontSizes";
 import { ThemeContext } from "../../../../theme/theme-context";
 import { statusCodes } from "../../../Config/Constants";
 import {
-  GET_PLANTATION_SITES
+  GET_PLANTATION_SITES, GET_SOWING_SITES
 } from "../../../Config/URLs";
-import { post } from "../../../Config/api";
+import { get, post } from "../../../Config/api";
 import { Unit } from "../../../Config/helper";
 
-export default function PlantationReportDashBoard(props: any) {
+export default function SowingReportDashBoard(props: any) {
   const [activeSections, setActiveSections] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [allReports, setAllReports] = React.useState(null);
@@ -42,15 +42,14 @@ export default function PlantationReportDashBoard(props: any) {
   }, []);
 
   const fetchData = async () => {
-    console.log(GET_PLANTATION_SITES);
-    const apiResponse = await post(GET_PLANTATION_SITES, {});
+    console.log(GET_SOWING_SITES);
+    setLoading(true);
+    const apiResponse = await get(GET_SOWING_SITES);
     console.log(" status ", apiResponse.data);
     if (apiResponse.status === statusCodes.SUCCESS) {
-      setAllReports(apiResponse.data.items);
-      return;
-    } else {
-      setLoading(false);
+      setAllReports(apiResponse.data);
     }
+    setLoading(false);
   };
 
   const _renderSectionTitle = (section: any, isActive: boolean) => {
@@ -142,7 +141,7 @@ export default function PlantationReportDashBoard(props: any) {
                   color: theme.textColor,
                 }}
               >
-                {moment.utc(section?.updatedAt).fromNow()}
+                {moment(section?.updatedAt).fromNow()}
               </Text>
             </View>
           </View>
@@ -204,7 +203,7 @@ export default function PlantationReportDashBoard(props: any) {
               </Text>
             </View>
             <Text style={{ flex: 1 }}>
-              {": " + section.area + " " + Unit(section?.unitType)}
+              {": " + section.area + " " + Unit(section?.areaUnit)}
             </Text>
           </View>
           <View
@@ -270,7 +269,7 @@ export default function PlantationReportDashBoard(props: any) {
               </View> */}
           <TouchableOpacity
             onPress={() =>
-              props.navigation.navigate("PlantationDetail", {
+              props.navigation.navigate("SowingDetail", {
                 item: section,
                 reportType,
               })

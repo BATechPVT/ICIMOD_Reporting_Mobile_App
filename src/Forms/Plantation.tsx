@@ -1553,7 +1553,7 @@ const PlantationForm = ({ navigation, route }) => {
             color: theme.buttonTitle,
           }}
         >
-          Add Plantation Site DashBoard
+          Add Plantation Activity
         </Text>
         <View style={styles.Container}>
           <ScrollView nestedScrollEnabled={true}>

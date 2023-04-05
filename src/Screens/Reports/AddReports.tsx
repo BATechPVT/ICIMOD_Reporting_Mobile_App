@@ -44,6 +44,8 @@ export default function AddReportScreen(props: any) {
       props.navigation.navigate("AnrReportDashBoard", { reportType });
     } else if (reportType == dataTypes.NURSERIES) {
       props.navigation.navigate("NurseryReportDashBoard", { reportType });
+    } else if (reportType == dataTypes.SOWING) {
+      props.navigation.navigate("SowingReportDashBoard", { reportType });
     }
   };
   return (
@@ -107,17 +109,19 @@ export default function AddReportScreen(props: any) {
               flex: 1,
             }}
           >
-            <Button
-              title={"Add " + reportType + " Site"}
-              onPress={() => navigateOptions()}
-              leftIcon={
-                <Image
-                  source={ADD_REPORT_ICON}
-                  resizeMode="contain"
-                  style={{ height: 25 }}
-                />
-              }
+            
+              <Button
+                title={"Add " + reportType + (reportType == dataTypes.PLANTATION ? " Activity": " Site")}
+                onPress={() => navigateOptions()}
+                leftIcon={
+                  <Image
+                    source={ADD_REPORT_ICON}
+                    resizeMode="contain"
+                    style={{ height: 25 }}
+                  />
+                }
             />
+
             {reportType == dataTypes.NURSERIES && (
               <Button
                 title={"Add " + "Nursery" + " Stock"}
@@ -133,10 +137,9 @@ export default function AddReportScreen(props: any) {
                 }
               />
             )}
-            {reportType !== dataTypes.DISTRIBUTION &&
-              reportType !== dataTypes.SOWING && (
+            {reportType !== dataTypes.DISTRIBUTION && (
                 <Button
-                  title={"View " + reportType + " Sites"}
+                  title={"View " + reportType + (reportType == dataTypes.PLANTATION ? " Activities": " Sites")}
                   onPress={() => reportNavigateOptions()}
                   leftIcon={
                     <Image
