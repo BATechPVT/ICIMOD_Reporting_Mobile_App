@@ -1,48 +1,36 @@
 import React, {
-  useCallback,
-  useMemo,
   useRef,
-  useEffect,
-  useState,
+  useState
 } from "react";
 import {
-  View,
-  Text,
-  ImageBackground,
   Image,
-  TouchableOpacity,
-  Alert,
-  TextInput,
   Keyboard,
   StyleSheet,
+  View
 } from "react-native";
-import { FontSizes } from "../../../theme/FontSizes";
-import { ThemeContext } from "../../../theme/theme-context";
-import { statusCodes, userData } from "../../Config/Constants";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import Spinner from "react-native-loading-spinner-overlay/lib";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { useUpdateEffect } from "react-use";
+import { APP_LOGO } from "../../../assets/Images";
+import { ThemeContext } from "../../../theme/theme-context";
 import { Button } from "../../Components/Button";
 import { CustomTextInput } from "../../Components/CustomTextInput";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { APP_LOGO } from "../../../assets/Images";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { useUpdateEffect } from "react-use";
+import ErrorAlert from "../../Components/ErrorAlerts";
+import { statusCodes, userData } from "../../Config/Constants";
+import { LOGIN } from "../../Config/URLs";
 import { post } from "../../Config/api";
 import { getData, setData } from "../../Config/localStorage";
-import { LOGIN } from "../../Config/URLs";
-import ErrorAlert from "../../Components/ErrorAlerts";
-import Spinner from "react-native-loading-spinner-overlay/lib";
+
 export default function LoginScreen(props: any) {
   const [email, setEmail] = React.useState("RO_Lahore@mocc.com");
   const [password, setPassword] = React.useState("123456@Aa");
-  const [checked, setChecked] = React.useState(true);
-  const [showPassword, setShowPassword] = React.useState(false);
   const { dark, theme, toggle } = React.useContext(ThemeContext);
   const [loading, setLoading] = React.useState(false);
-  const [showSuccessAlert, setShowSuccessAlert] = React.useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [secureTextEntry, setSecureTextEntry] = useState(true);
@@ -67,7 +55,6 @@ export default function LoginScreen(props: any) {
       username: email,
       password: password,
     };
-    console.log(body);
     new Promise((resolve, reject) => {
       post(LOGIN, body)
         .then((res) => {
