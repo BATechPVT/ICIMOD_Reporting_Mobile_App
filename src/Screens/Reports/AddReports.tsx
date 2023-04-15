@@ -13,6 +13,7 @@ import { ThemeContext } from "../../../theme/theme-context";
 import { Button } from "../../Components/Button";
 import { dataTypes } from "../../Config/Constants";
 import { CautionModal } from "./CautionModal";
+
 export default function AddReportScreen(props: any) {
   const [loading, setLoading] = React.useState(true);
   const { dark, theme, toggle } = React.useContext(ThemeContext);
@@ -35,6 +36,7 @@ export default function AddReportScreen(props: any) {
       props.navigation.navigate("NurseryForm", { reportType });
     }
   };
+
   const reportNavigateOptions = () => {
     if (reportType == dataTypes.FOREST_SITE) {
       props.navigation.navigate("ForestReportDashBoard", { reportType });
@@ -48,6 +50,7 @@ export default function AddReportScreen(props: any) {
       props.navigation.navigate("SowingReportDashBoard", { reportType });
     }
   };
+  
   return (
     <View style={{ flex: 1, backgroundColor: theme.backGround }}>
       <Ionicons

@@ -272,27 +272,6 @@ const ForestForm = ({ navigation, route }) => {
     }
   };
 
-  useEffect(() => {
-    const backAction = () => {
-      Alert.alert("Are you sure?", "Your current progress will be lost.", [
-        {
-          text: "Cancel",
-          onPress: () => null,
-          style: "cancel",
-        },
-        { text: "YES", onPress: () => navigation.navigate("DashBoard") },
-      ]);
-      return true;
-    };
-
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
-
-    return () => backHandler.remove();
-  }, []);
-
   const SubmitFunction = () => {
     if (lat1 == 0 || lat2 == 0 || lat3 == 0 || lat4 == 0 || lat5 == 0) {
       Alert.alert("Failure", "Please select atleast five points.", [
@@ -360,12 +339,12 @@ const ForestForm = ({ navigation, route }) => {
           // "Point10LattitudeY": 30.2285471,
   
           division: DivisionValue?.id,
-          DistrictId: DistrictValue?.id,
-          TehsilId: TehsilValue?.id,
+          districtId: DistrictValue?.id,
+          tehsilId: TehsilValue?.id,
           siteType: SiteTypeValue?.id,
           siteName: siteName,
           village: village,
-          area: area,
+          area: Number(area),
           unit: UnitValue?.id,
           siteImage: base64String,
           siteId: 0,
@@ -376,7 +355,6 @@ const ForestForm = ({ navigation, route }) => {
           shapeFile: base64String,
         };
   
-        console.log('division: ', division);
         console.log('url: ', baseurl + "forest/addsite");
         console.log('body: ', JSON.stringify(data));
   
@@ -391,7 +369,6 @@ const ForestForm = ({ navigation, route }) => {
           },
         })
           .then(function (response) {
-            console.log("success ", response);
             setIsLoading(false);
             Alert.alert("Success", response.data, [
               {
@@ -512,7 +489,7 @@ const ForestForm = ({ navigation, route }) => {
   const GetTehsil = async () => {
     try {
       axios
-        .get(baseurl + "Nursery/TehsilsList")
+        .get(baseurl + "Forest/TehsilsListByDistrictId/"+DistrictValue?.id)
         .then((response) => {
           if (response.status === 200) {
             setSheetData({
@@ -523,10 +500,10 @@ const ForestForm = ({ navigation, route }) => {
           }
         })
         .catch((error) => {
-          console.log(error);
+          console.log("response error: ", error);
         });
     } catch (error) {
-      console.log(error);
+      console.log("error: ", error);
     }
   };
   {
@@ -634,6 +611,7 @@ const ForestForm = ({ navigation, route }) => {
       SubmitFunction();
     }
   };
+
   const renderBackDrop = useCallback(
     (props: any) => (
       <BottomSheetBackdrop
@@ -645,6 +623,7 @@ const ForestForm = ({ navigation, route }) => {
     ),
     []
   );
+
   const onSelectValue = (value: any) => {
     bottomSheetRef.current.dismiss();
     switch (sheetData.activeIndex) {
@@ -1128,7 +1107,6 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 60,
-    width: width * 0.9,
     marginVertical: 5,
     borderRadius: 10,
     borderColor: "#A8B4BC",

@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import Accordion from "react-native-collapsible/Accordion";
+import Spinner from "react-native-loading-spinner-overlay/lib";
 import {
   widthPercentageToDP as wp
 } from "react-native-responsive-screen";
@@ -55,15 +56,13 @@ export default function ForestReportDashBoard(props: any) {
   }, []);
 
   const fetchData = async () => {
-    console.log(" hy ");
+    setLoading(true)
     const apiResponse = await get(GET_FOREST_SITES);
     console.log(" status ", apiResponse.status);
     if (apiResponse.status === statusCodes.SUCCESS) {
-      setAllReports(apiResponse.data);
-      return;
-    } else {
-      setLoading(false);
-    }
+      setAllReports(apiResponse.data);    
+    } 
+    setLoading(false);
   };
 
   const _renderSectionTitle = (section: any, isActive: boolean) => {
@@ -322,7 +321,9 @@ export default function ForestReportDashBoard(props: any) {
   const _updateSections = (activeSections: any) => {
     setActiveSections(activeSections);
   };
+
   return (
+    <>
     <View style={{ flex: 1, backgroundColor: theme.primary }}>
       <Ionicons
         name="arrow-back-sharp"
@@ -393,5 +394,13 @@ export default function ForestReportDashBoard(props: any) {
         </View>
       </View>
     </View>
+    {loading && 
+    <Spinner
+    visible={loading}
+    textContent={"Loading..."}
+    textStyle={{ color: theme.primary }}
+  />
+    }
+    </>
   );
 }
